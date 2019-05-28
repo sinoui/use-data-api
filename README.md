@@ -1,31 +1,104 @@
-# use-data-api
+# @sinoui/use-data-api
 
-这是由[ts-lib-scripts](https://github.com/sinoui/ts-lib-scripts)创建的TypeScript库项目。
+使用[React Hooks](https://zh-hans.reactjs.org/docs/hooks-intro.html)实现数据加载的库。
 
-## 本地开发
+## 安装
 
-项目中有以下有用的命令。
+```shell
+yarn add @sinoui/use-data-api
+```
 
-### `yarn start`
+或者
 
-在开发和监听模式下启动项目。当代码发生变化时就会重新编译代码。它同时会实时地向你汇报项目中的代码错误。
+```shell
+npm i --save @sinoui/use-data-api
+```
 
-### `yarn build`
+## 使用
 
-打包，并将打包文件放在`dist`文件夹中。使用 rollup 对代码做优化并打包成多种格式（`Common JS`，`UMD`和`ES Module`）。
+```tsx
+import React, { useState } from 'react';
+import useDataApi from '@sinoui/useDataApi';
 
-### `yarn lint`
+interface User {
+  userId: string;
+  userName: string;
+}
 
-`yarn lint`会检查整个项目是否有代码错误、风格错误。
+function UserList() {
+  const [searchText, setSearchText] = useState('');
+  const { data, isLoading, isError, doFetch } = useDataApi<User[]>(
+    '/users',
+    [],
+  );
 
-开启 vscode 的 eslint、prettier 插件，在使用 vscode 编码时，就会自动修正风格错误、提示语法错误。
+  const handleSearch = () => {
+    doFetch(`/users?text=${searchText}`);
+    setSearchText('');
+  };
 
-### `yarn format`
+  return (
+    <div>
+      <form>
+        <label>姓名</label>
+        <input
+          type="text"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
+        <button onClick={handleSearch}>查询</button>
+      </form>
+      {isLoading && <div>正在加载数据</div>}
+      {isError && <div>加载数据失败</div>}
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>{user.userName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
 
-`yarn format`可以自动调整整个项目的代码风格问题。
+## 方法说明
 
-### `yarn test`
+```ts
+import useDataApi from '@sinoui/use-data-api';
 
-`yarn test`以监听模式启动 jest，运行单元测试。
+interface DataSource<T> {
+  /**
+   * 从API中获取到的数据
+   */
+  data: T;
+  /**
+   * 数据加载中状态。`true`表示数据加载中。
+   */
+  isLoading: boolean;
+  /**
+   * 数据加载失败状态。`true`表示数据加载失败。
+   */
+  isError: boolean;
+  /**
+   * 加载数据
+   *
+   * @param {string} url 获取数据的url
+   * @param {boolean} forceFetch 当指定的`url`与上一次请求的`url`一致时，是否发送API请求。
+   *                              默认为`true`，表示发送请求。
+   */
+  doFetch: (url: string, forceFetch?: boolean) => void;
+  /**
+   * 更新数据
+   */
+  updateData: (data: T) => void;
+}
 
-开启 vscode 的 jest 插件，会在文件变化时自动运行单元测试。
+/**
+ * 数据加载hook
+ *
+ * @template T
+ * @param {string} defaultUrl 默认加载数据的链接
+ * @param {T} defaultValue 默认数据
+ * @returns {DataSource<T>}
+ */
+function useDataApi<T>(defaultUrl: string, defaultValue: T): DataSource<T>;
+```
