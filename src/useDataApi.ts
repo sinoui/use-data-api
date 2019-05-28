@@ -64,7 +64,7 @@ export default function useDataApi<T>(
   }, []);
 
   const doFetch = useCallback(
-    (url: string, forceUpdate: boolean = true) => {
+    (url?: string, forceUpdate: boolean = true) => {
       if (!url) {
         return;
       }
