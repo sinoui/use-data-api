@@ -22,7 +22,7 @@ interface DataSource<T> {
    * @param {boolean} forceFetch 当指定的`url`与上一次请求的`url`一致时，是否发送API请求。
    *                              默认为`true`，表示发送请求。
    */
-  doFetch: (url: string, forceFetch?: boolean) => void;
+  doFetch: (url?: string, forceFetch?: boolean) => void;
   /**
    * 更新数据状态
    *

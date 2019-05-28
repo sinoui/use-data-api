@@ -89,7 +89,7 @@ interface DataSource<T> {
    * @param {boolean} forceFetch 当指定的`url`与上一次请求的`url`一致时，是否发送API请求。
    *                              默认为`true`，表示发送请求。
    */
-  doFetch: (url: string, forceFetch?: boolean) => void;
+  doFetch: (url?: string, forceFetch?: boolean) => void;
   /**
    * 更新数据
    */
@@ -104,5 +104,8 @@ interface DataSource<T> {
  * @param {T} defaultValue 默认数据
  * @returns {DataSource<T>}
  */
-function useDataApi<T>(defaultUrl: string, defaultValue: T): DataSource<T>;
+function useDataApi<T>(
+  defaultUrl: string | undefined,
+  defaultValue: T,
+): DataSource<T>;
 ```
