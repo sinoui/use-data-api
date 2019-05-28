@@ -41,7 +41,7 @@ interface DataSource<T> {
  * @returns
  */
 export default function useDataApi<T>(
-  defaultUrl: string,
+  defaultUrl: string | undefined | null,
   defaultData: T,
 ): DataSource<T> {
   const initialState: State<T> = {
@@ -53,7 +53,7 @@ export default function useDataApi<T>(
     reduer,
     initialState,
   );
-  const urlRef = useRef<string>(defaultUrl);
+  const urlRef = useRef<string | undefined | null>(defaultUrl);
   const cancelRef = useRef<() => void>();
 
   const doCancel = useCallback(() => {
@@ -65,6 +65,10 @@ export default function useDataApi<T>(
 
   const doFetch = useCallback(
     (url: string, forceUpdate: boolean = true) => {
+      if (!url) {
+        return;
+      }
+
       if (!forceUpdate && urlRef.current === url) {
         return;
       }
@@ -79,7 +83,9 @@ export default function useDataApi<T>(
   );
 
   useEffect(() => {
-    doFetch(urlRef.current);
+    if (urlRef.current) {
+      doFetch(urlRef.current);
+    }
     return doCancel;
   }, [doFetch, doCancel]);
 

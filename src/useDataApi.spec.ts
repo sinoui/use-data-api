@@ -103,3 +103,21 @@ it('更新数据', () => {
     payload: 2,
   });
 });
+
+it('指定空的url，则不会加载数据', () => {
+  (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
+
+  renderHook(() => useDataApi(undefined, 1));
+
+  expect(fetchApi).not.toBeCalled();
+});
+
+it('使用空的url调用doFetch，不发送API请求', () => {
+  (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
+
+  const { result } = renderHook(() => useDataApi(undefined, 1));
+
+  result.current.doFetch('');
+
+  expect(fetchApi).not.toBeCalled();
+});
