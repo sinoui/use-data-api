@@ -60,6 +60,10 @@ function UserList() {
 }
 ```
 
+另外一个加载 Hacker News 的例子：
+
+[例子源码](https://github.com/sinoui/use-data-api-example)，[例子效果](https://sinoui.github.io/use-data-api-example/)。
+
 ## 方法说明
 
 ```ts
