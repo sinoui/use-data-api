@@ -102,10 +102,27 @@ interface DataSource<T> {
  * @template T
  * @param {string} defaultUrl 默认加载数据的链接
  * @param {T} defaultValue 默认数据
+ * @param {HttpRequestConfig} httpRequestConfig 请求配置
  * @returns {DataSource<T>}
  */
 function useDataApi<T>(
   defaultUrl: string | undefined,
   defaultValue: T,
+  httpRequestConfig: HttpRequestConfig,
 ): DataSource<T>;
 ```
+
+默认通过`GET`方法发送API请求，获取到的响应数据直接作为`dataSource.data`。可以通过`httpRequestConfig`来调整，如下所示：
+
+```ts
+const transformResponse = (data) => data.map(item => item.userName); // 将人员信息列表转换成人名列表
+
+const dataSource = useDataApi('/users', [], {
+  transformResponse,
+  method: 'POST',
+});
+```
+
+更多请求配置参见[Axios Request Config](https://github.com/axios/axios#request-config)。
+
+注意：如果`url`为空（`''`、`null`、`undefined`）时，则不会发送API请求。

@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useRef, useReducer } from 'react';
+import { HttpRequestConfig } from '@sinoui/http';
 import reduer from './reducer';
 import fetchApi from './fetchApi';
 
@@ -43,6 +44,7 @@ interface DataSource<T> {
 export default function useDataApi<T>(
   defaultUrl: string | undefined | null,
   defaultData: T,
+  options?: HttpRequestConfig,
 ): DataSource<T> {
   const initialState: State<T> = {
     data: defaultData,
@@ -55,6 +57,7 @@ export default function useDataApi<T>(
   );
   const urlRef = useRef<string | undefined | null>(defaultUrl);
   const cancelRef = useRef<() => void>();
+  const optionsRef = useRef(options);
 
   const doCancel = useCallback(() => {
     if (cancelRef.current) {
@@ -76,7 +79,7 @@ export default function useDataApi<T>(
 
       doCancel();
 
-      const [, cancel] = fetchApi(dispatch, url);
+      const [, cancel] = fetchApi(dispatch, url, optionsRef.current);
       cancelRef.current = cancel;
     },
     [doCancel],

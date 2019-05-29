@@ -63,3 +63,17 @@ it('先请求，再取消，之后响应失败', async () => {
     type: 'FETCH_FAILURE',
   });
 });
+
+it('使用POST发送API请求', async () => {
+  const dispatch = jest.fn();
+  (http.post as jest.Mock).mockResolvedValue(1);
+
+  const [promise] = fetchApi(dispatch, '/users', {
+    method: 'POST',
+  });
+
+  await promise;
+
+  expect(dispatch).toHaveBeenCalledWith({ type: 'FETCH_INIT' });
+  expect(dispatch).toHaveBeenCalledWith({ type: 'FETCH_SUCCESS', payload: 1 });
+});

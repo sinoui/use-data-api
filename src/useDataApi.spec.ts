@@ -121,3 +121,12 @@ it('使用空的url调用doFetch，不发送API请求', () => {
 
   expect(fetchApi).not.toBeCalled();
 });
+
+it('可以指定请求数据的配置', () => {
+  (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
+
+  const options = { method: 'POST', transformResponse: jest.fn() };
+  renderHook(() => useDataApi('/users', 1, options));
+
+  expect(fetchApi).toBeCalledWith(expect.anything(), '/users', options);
+});
