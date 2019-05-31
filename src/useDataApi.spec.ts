@@ -1,4 +1,5 @@
 import { renderHook } from 'react-hooks-testing-library';
+import { HttpRequestConfig } from '@sinoui/http';
 import useDataApi from './useDataApi';
 import reducer from './reducer';
 import fetchApi from './fetchApi';
@@ -125,7 +126,10 @@ it('使用空的url调用doFetch，不发送API请求', () => {
 it('可以指定请求数据的配置', () => {
   (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
 
-  const options = { method: 'POST', transformResponse: jest.fn() };
+  const options: HttpRequestConfig = {
+    method: 'POST',
+    transformResponse: jest.fn(),
+  };
   renderHook(() => useDataApi('/users', 1, options));
 
   expect(fetchApi).toBeCalledWith(expect.anything(), '/users', options);
