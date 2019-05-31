@@ -1,20 +1,24 @@
 # CHANGELOG
 
+## v0.3.1 2019-05-31
+
+- fix: 升级@sinoui/http 依赖版本号，修复 axios 的安全漏洞
+
 ## v0.3.0 2019-05-29
 
-* feat: 可指定API请求配置
+- feat: 可指定 API 请求配置
 
-    如下：
+  如下：
 
-    ```ts
-    const transformResponse = (data) => data.map(item => item.userName); // 将人员信息列表转换成人名列表
+  ```ts
+  const transformResponse = (data) => data.map((item) => item.userName); // 将人员信息列表转换成人名列表
 
-    const dataSource = useDataApi('/users', [], {
+  const dataSource = useDataApi('/users', [], {
     transformResponse,
     method: 'POST',
-    });
-    ```
+  });
+  ```
 
 ## v0.2.0 - 2019-05-28
 
-* feat: url为空时，不发送API请求
+- feat: url 为空时，不发送 API 请求
