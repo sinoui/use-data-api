@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.3.2 2019-05-31
+
+- fix: 修复.d.ts 导出错误
+
 ## v0.3.1 2019-05-31
 
 - fix: 升级@sinoui/http 依赖版本号，修复 axios 的安全漏洞
