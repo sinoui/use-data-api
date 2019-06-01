@@ -31,7 +31,7 @@ export default function reduer<T>(
         isLoading: false,
         isError: true,
       };
-    case 'UPDATE_DATA':
+    case 'SET_DATA':
       return {
         ...state,
         data: action.payload,

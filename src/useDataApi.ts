@@ -29,7 +29,7 @@ interface DataSource<T> {
    *
    * @param {T} data 新的数据。
    */
-  updateData: (data: T) => void;
+  setData: (data: T) => void;
 }
 
 /**
@@ -92,9 +92,9 @@ export default function useDataApi<T>(
     return doCancel;
   }, [doFetch, doCancel]);
 
-  const updateData = (data: T) => {
-    dispatch({ type: 'UPDATE_DATA', payload: data });
+  const setData = (data: T) => {
+    dispatch({ type: 'SET_DATA', payload: data });
   };
 
-  return { ...state, doFetch, updateData };
+  return { ...state, doFetch, setData };
 }

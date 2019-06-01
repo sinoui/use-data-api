@@ -97,10 +97,10 @@ it('更新数据', () => {
 
   const { result } = renderHook(() => useDataApi('/users', 1));
 
-  result.current.updateData(2);
+  result.current.setData(2);
 
   expect(reducer as jest.Mock).toHaveBeenCalledWith(expect.anything(), {
-    type: 'UPDATE_DATA',
+    type: 'SET_DATA',
     payload: 2,
   });
 });

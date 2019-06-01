@@ -65,7 +65,7 @@ it('更新数据', () => {
       isError: false,
       data: 1,
     },
-    { type: 'UPDATE_DATA', payload: 2 },
+    { type: 'SET_DATA', payload: 2 },
   );
 
   expect(result).toEqual({

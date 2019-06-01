@@ -16,7 +16,7 @@ type Action<T> =
       type: 'FETCH_FAILURE';
     }
   | {
-      type: 'UPDATE_DATA';
+      type: 'SET_DATA';
       payload: T;
     };
 
