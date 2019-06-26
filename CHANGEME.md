@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.5.0 2019-06-26
+
+- feat: 新增`reload()`方法，用来重新加载数据，相当于`doFetch(currentUrl)`。
+- docs: 调整示例。
+
 ## v0.4.0 2019-06-01
 
 - feat: `DataSource.updateData`变更为`DataSource.setData`

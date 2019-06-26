@@ -30,6 +30,11 @@ interface DataSource<T> {
    * @param {T} data 新的数据。
    */
   setData: (data: T) => void;
+
+  /**
+   * 重新加载数据
+   */
+  reload: () => void;
 }
 
 /**
@@ -42,7 +47,7 @@ interface DataSource<T> {
  * @returns
  */
 export default function useDataApi<T>(
-  defaultUrl: string | undefined | null,
+  defaultUrl: string | undefined,
   defaultData: T,
   options?: HttpRequestConfig,
 ): DataSource<T> {
@@ -55,7 +60,7 @@ export default function useDataApi<T>(
     reduer,
     initialState,
   );
-  const urlRef = useRef<string | undefined | null>(defaultUrl);
+  const urlRef = useRef<string | undefined>(defaultUrl);
   const cancelRef = useRef<() => void>();
   const optionsRef = useRef(options);
 
@@ -85,6 +90,10 @@ export default function useDataApi<T>(
     [doCancel],
   );
 
+  const reload = useCallback(() => {
+    doFetch(urlRef.current);
+  }, [doFetch]);
+
   useEffect(() => {
     if (urlRef.current) {
       doFetch(urlRef.current);
@@ -96,5 +105,5 @@ export default function useDataApi<T>(
     dispatch({ type: 'SET_DATA', payload: data });
   };
 
-  return { ...state, doFetch, setData };
+  return { ...state, doFetch, setData, reload };
 }

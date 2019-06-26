@@ -16,9 +16,42 @@ npm i --save @sinoui/use-data-api
 
 ## 使用
 
+简单示例：
+
 ```tsx
 import React, { useState } from 'react';
-import useDataApi from '@sinoui/useDataApi';
+import useDataApi from '@sinoui/use-data-api';
+
+interface User {
+  userId: string;
+  userName: string;
+}
+
+function UserList() {
+  const { data, isLoading, isError, doFetch } = useDataApi<User[]>(
+    '/users',
+    [],
+  );
+
+  return (
+    <div>
+      {isLoading && <div>正在加载数据</div>}
+      {isError && <div>加载数据失败</div>}
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>{user.userName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+查询示例：
+
+```tsx
+import React, { useState } from 'react';
+import useDataApi from '@sinoui/use-data-api';
 
 interface User {
   userId: string;
@@ -90,6 +123,12 @@ interface DataSource<T> {
    *                              默认为`true`，表示发送请求。
    */
   doFetch: (url?: string, forceFetch?: boolean) => void;
+
+  /**
+   * 重新加载数据
+   */
+  reload: () => void;
+
   /**
    * 更新数据
    */

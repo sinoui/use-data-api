@@ -134,3 +134,14 @@ it('可以指定请求数据的配置', () => {
 
   expect(fetchApi).toBeCalledWith(expect.anything(), '/users', options);
 });
+
+it('重新加载数据', () => {
+  (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
+
+  const { result } = renderHook(() => useDataApi('/users', 1));
+
+  const { reload } = result.current;
+  reload();
+
+  expect(fetchApi).toHaveBeenCalledTimes(2);
+});
