@@ -1,5 +1,8 @@
 # @sinoui/use-data-api
 
+[![npm version](https://img.shields.io/npm/v/@sinoui/use-data-api)](https://www.npmjs.com/package/@sinoui/use-data-api)
+[![downloads](https://img.shields.io/npm/dm/@sinoui/use-data-api)](https://www.npmjs.com/package/@sinoui/use-data-api)
+
 使用[React Hooks](https://zh-hans.reactjs.org/docs/hooks-intro.html)实现数据加载的库。
 
 ## 安装
