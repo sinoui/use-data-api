@@ -1,5 +1,5 @@
 import http from '@sinoui/http';
-import { renderHook } from 'react-hooks-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
 import useDataApi from './index';
 
 jest.mock('@sinoui/http');

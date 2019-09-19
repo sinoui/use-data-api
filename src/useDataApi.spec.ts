@@ -1,4 +1,4 @@
-import { renderHook } from 'react-hooks-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
 import { HttpRequestConfig } from '@sinoui/http';
 import useDataApi from './useDataApi';
 import reducer from './reducer';
