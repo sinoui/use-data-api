@@ -3,8 +3,7 @@
   "version": "0.5.0",
   "license": "MIT",
   "main": "dist/index.js",
-  "umd:main": "dist/use-data-api.umd.production.js",
-  "module": "dist/use-data-api.es.production.js",
+  "module": "dist/sinoui-use-data-api.esm.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "start": "ts-lib-tools watch",
@@ -45,20 +44,20 @@
     "assets"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@babel/runtime": "^7.4.5",
-    "@sinoui/http": "^0.2.2"
+    "@babel/polyfill": "^7.6.0",
+    "@babel/runtime": "^7.6.0",
+    "@sinoui/http": "^1.0.0"
   },
   "devDependencies": {
-    "@types/react": "^16.8.18",
-    "husky": "^2.3.0",
-    "lint-staged": "^8.1.7",
-    "prettier": "^1.17.1",
-    "react": "^16.8.6",
-    "react-hooks-testing-library": "^0.5.0",
-    "react-test-renderer": "^16.8.6",
-    "ts-lib-tools": "^0.1.7",
-    "typescript": "^3.4.5"
+    "@types/react": "^16.9.2",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "@testing-library/react-hooks": "^2.0.1",
+    "react-test-renderer": "^16.9.0",
+    "ts-lib-tools": "^0.4.7",
+    "typescript": "^3.6.3"
   },
   "peerDependencies": {
     "react": "^16.8.0"
