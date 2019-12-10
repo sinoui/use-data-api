@@ -2,7 +2,7 @@ import { useEffect, useCallback, useRef, useReducer } from 'react';
 import { HttpRequestConfig } from '@sinoui/http';
 import reduer from './reducer';
 import fetchApi from './fetchApi';
-import { State, FetchApiReducer } from './types';
+import { FetchApiReducer } from './types';
 
 interface DataSource<T> {
   /**
@@ -52,14 +52,14 @@ export default function useDataApi<T>(
   defaultData: T,
   options?: HttpRequestConfig,
 ): DataSource<T> {
-  const initialState: State<T> = {
-    data: defaultData,
-    isLoading: true,
-    isError: false,
-  };
-  const [state, dispatch] = useReducer<FetchApiReducer<T>>(
+  const [state, dispatch] = useReducer<FetchApiReducer<T>, undefined>(
     reduer,
-    initialState,
+    undefined,
+    () => ({
+      data: defaultData,
+      isLoading: !!defaultUrl,
+      isError: false,
+    }),
   );
   const urlRef = useRef<string | undefined>(defaultUrl);
   const cancelRef = useRef<() => void>();

@@ -108,9 +108,10 @@ it('更新数据', () => {
 it('指定空的url，则不会加载数据', () => {
   (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
 
-  renderHook(() => useDataApi(undefined, 1));
+  const { result } = renderHook(() => useDataApi(undefined, 1));
 
   expect(fetchApi).not.toBeCalled();
+  expect(result.current.isLoading).toBe(false);
 });
 
 it('使用空的url调用doFetch，不发送API请求', () => {
