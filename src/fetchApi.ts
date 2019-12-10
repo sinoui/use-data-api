@@ -1,4 +1,5 @@
 import http, { HttpRequestConfig } from '@sinoui/http';
+import { Action } from './types';
 
 /**
  * 请求API
