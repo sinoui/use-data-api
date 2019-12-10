@@ -1,3 +1,5 @@
+import { State, Action } from './types';
+
 /**
  * 加载数据状态的reducer
  *

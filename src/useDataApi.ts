@@ -2,6 +2,7 @@ import { useEffect, useCallback, useRef, useReducer } from 'react';
 import { HttpRequestConfig } from '@sinoui/http';
 import reduer from './reducer';
 import fetchApi from './fetchApi';
+import { State, FetchApiReducer } from './types';
 
 interface DataSource<T> {
   /**
@@ -72,7 +73,7 @@ export default function useDataApi<T>(
   }, []);
 
   const doFetch = useCallback(
-    (url?: string, forceUpdate: boolean = true) => {
+    (url?: string, forceUpdate = true) => {
       if (!url) {
         return;
       }

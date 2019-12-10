@@ -1,10 +1,10 @@
-interface State<T> {
+export interface State<T> {
   data: T;
   isLoading: boolean;
   isError: boolean;
 }
 
-type Action<T> =
+export type Action<T> =
   | {
       type: 'FETCH_INIT';
     }
@@ -20,4 +20,4 @@ type Action<T> =
       payload: T;
     };
 
-declare type FetchApiReducer<T> = React.Reducer<State<T>, Action<T>>;
+export type FetchApiReducer<T> = React.Reducer<State<T>, Action<T>>;
