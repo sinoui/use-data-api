@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.2 2019.12.10
+
+- fix: 修复默认 url 为空时，isLoading 为 true 的缺陷
+- fix: 修复 ts 类型错误提示
+
 ## v0.5.0 2019-06-26
 
 - feat: 新增`reload()`方法，用来重新加载数据，相当于`doFetch(currentUrl)`。
