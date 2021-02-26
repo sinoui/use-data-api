@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.3 2021.2.26
+
+- fix: 修复 defaultUrl 发生变更，没有自动发送请求的缺陷
+
 ## v1.0.2 2019.12.10
 
 - fix: 修复默认 url 为空时，isLoading 为 true 的缺陷

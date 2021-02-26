@@ -146,3 +146,18 @@ it('重新加载数据', () => {
 
   expect(fetchApi).toHaveBeenCalledTimes(2);
 });
+
+it('指定不同的url，发送不同的http请求', () => {
+  (fetchApi as jest.Mock).mockReturnValue([Promise.resolve(), null]);
+  const { rerender } = renderHook(
+    ({ id }: { id: string }) => useDataApi(`/users/${id}`, 1),
+    {
+      initialProps: { id: '1' },
+    },
+  );
+
+  expect((fetchApi as jest.Mock).mock.calls[0][1]).toBe('/users/1');
+
+  rerender({ id: '2' });
+  expect((fetchApi as jest.Mock).mock.calls[1][1]).toBe('/users/2');
+});

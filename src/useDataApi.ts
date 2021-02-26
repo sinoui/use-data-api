@@ -96,11 +96,12 @@ export default function useDataApi<T>(
   }, [doFetch]);
 
   useEffect(() => {
+    urlRef.current = defaultUrl;
     if (urlRef.current) {
       doFetch(urlRef.current);
     }
     return doCancel;
-  }, [doFetch, doCancel]);
+  }, [doFetch, doCancel, defaultUrl]);
 
   const setData = (data: T) => {
     dispatch({ type: 'SET_DATA', payload: data });
